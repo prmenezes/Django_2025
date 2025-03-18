@@ -33,6 +33,7 @@ urlpatterns = [
     path('', HomeView.as_view()),
     path('admin/', admin.site.urls),
     path('list_people/', list_people_view)
+    
 
 ]
 
