@@ -54,11 +54,12 @@ def list_people_view(request: HttpRequest) -> HttpResponse:
     }
     return render(request, "people_view.html", context=silly_things)
     
-# def people_detail_view(request: HttpRequest, id:int) -> HttpResponse:
-#     silly_things = {
-#         "people": Person.objects.all()
-#     }
-#     return render(request, "people_view.html", context=silly_things)
+def people_detail_view(request: HttpRequest, id:int) -> HttpResponse:
+    
+    context_detail_view = {
+        "person" : Person.objects.get(p_id=id)
+    }
+    return render(request, "people_detail_view.html", context=context_detail_view)
 
 
 

@@ -1,0 +1,26 @@
+<h1>Person Details</h1>
+
+{% if person %}
+<ul>
+    <p>{{person}}</p>
+    <li>PID: {{person.p_id}}</li>
+    <li>FIRST NAME: {{person.first_name}}</li>
+    <li>LAST NAME: {{person.last_name}}</li>
+    <li>BIRTHDAY: {{person.birthday}}</li>
+
+    <li>ADDRESS: {{person.address}}</li>
+
+
+    {% comment %} <li>{{person.address.unit_number}}</li>
+    <li>{{person.address.street}}</li>
+    <li>{{person.address.city}}</li>
+    <li>{{person.address.province}}</li>
+    <li>{{person.address.postal_code}}</li>
+    <li>{{person.address.country}}</li> {% endcomment %}
+
+
+
+</ul>
+{% else %}
+<p>Person does not exist!</p>
+{%endif%}

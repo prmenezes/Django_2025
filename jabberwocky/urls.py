@@ -15,7 +15,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from home.views import HomeView, list_people_view
+from home.views import HomeView, list_people_view, people_detail_view
 
 from django.http import HttpResponse
 from django.contrib import admin
@@ -32,7 +32,8 @@ urlpatterns = [
     path('<int:foo>/<str:bar>', inventory),
     path('', HomeView.as_view()),
     path('admin/', admin.site.urls),
-    path('list_people/', list_people_view)
+    path('list_people/', list_people_view),
+    path('people_detail_view/<int:id>/', people_detail_view)
     
 
 ]
