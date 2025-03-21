@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from home.models import Address, Person
+from home.models import Address, Person, Club
 
 # Register your models here.
 
@@ -10,5 +10,10 @@ class PersonAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
     list_display=["street", "city", "province"]
 
+class ClubAdmin(admin.ModelAdmin):
+    list_display=["name"]
+
+
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Address, AddressAdmin)
+admin.site.register(Club, ClubAdmin)

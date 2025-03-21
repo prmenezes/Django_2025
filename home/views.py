@@ -17,33 +17,49 @@ from home.models.address import Address
 class HomeView(View):
 
     def get(self, request):
-        return HttpResponse("hello World")
+
+        context = {
+            "username": "guy"
+        }
+        #return HttpResponse("hello World")
+        return render(request, "hello_world.html", context=context)
 
 
 
 def list_people_view(request: HttpRequest) -> HttpResponse:
 
-    people_response = """
+    # people_response = """
 
-        <h1>People</h1>
-            <ul>
+    #     <h1>People</h1>
+    #         <ul>
 
-    """
-    people = Person.objects.all()
+    # """
+    #people = Person.objects.all()
     #people = people.filter(last_name='Simpson')
     # last_name='Simpson', first_name='Homer' - the comma here is treated like an AND
     #people = people.exclude(last_name='Simpson', first_name='Homer').order_by("-sin")
-    people = people.filter(address__province__iexact='sk')
+    #people = people.filter(address__province__iexact='sk')
 
 
 
-    for person in people:
-        #if person.last_name == "Simpson":
-        people_response = people_response + f"<li>{person}</li>"
+    # for person in people:
+    #     #if person.last_name == "Simpson":
+    #     people_response = people_response + f"<li>{person}</li>"
 
-    people_response += "</ul>"
-    return HttpResponse(people_response)
+    # people_response += "</ul>"
+    # return HttpResponse(people_response)
+    silly_things = {
+        "people": Person.objects.all()
+        #"people": Person.objects.filter(first_name="billy")
+    }
+    return render(request, "people_view.html", context=silly_things)
     
+# def people_detail_view(request: HttpRequest, id:int) -> HttpResponse:
+#     silly_things = {
+#         "people": Person.objects.all()
+#     }
+#     return render(request, "people_view.html", context=silly_things)
+
 
 
 # def home(request):

@@ -23,7 +23,7 @@ from django.urls import path
 
 
 def inventory(request, *args, **kwargs):
-    return HttpResponse(f"foo:{kwargs.get('foo')} and bar: {kwargs.get('bar')}")
+    return HttpResponse(f"foo:{kwargs.get('foo')} and bar: {kwargs['bar']}")
 
 
 
