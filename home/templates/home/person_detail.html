@@ -1,0 +1,23 @@
+
+
+
+{% extends "base.html" %}
+
+{% block title%}{{person}}{% endblock%}
+
+
+{% block people_list-active %}active{%endblock%}
+
+{% block content%}
+<div> 
+    <h2>{{person}}</h2>
+    <p>Address: {{person.address}}</p>
+    <p>Birthday: {{person.birthday}}</p>
+    <p> Created: {{person.created}}</p>
+</div>
+{% endblock%}
+
+
+
+
+

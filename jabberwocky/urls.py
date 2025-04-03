@@ -15,25 +15,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from home.views import HomeView, list_people_view, person_detail_view
+from home.views import HomeView, PeopleView, PersonDetailView
 
 from django.http import HttpResponse
 from django.contrib import admin
 from django.urls import path
 
 
-def inventory(request, *args, **kwargs):
-    return HttpResponse(f"foo:{kwargs.get('foo')} and bar: {kwargs['bar']}")
+# def inventory(request, *args, **kwargs):
+#     return HttpResponse(f"foo:{kwargs.get('foo')} and bar: {kwargs['bar']}")
 
 
 
 
 urlpatterns = [
-    path('<int:foo>/<str:bar>', inventory),
     path('', HomeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('people/', list_people_view, name="people_list"),
-    path('people/<int:id>/', person_detail_view, name="person_details"),
+    path('people/', PeopleView.as_view(), name="people_list"),
+    path('people/<int:pk>/', PersonDetailView.as_view(), name="person_details"),
 
     
 ]

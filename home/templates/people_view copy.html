@@ -1,13 +1,26 @@
 
+{% extends "base.html" %}
 
+{% block title%}People{% endblock%}
+
+
+{% block people_list-active %}active{%endblock%}
+
+{% block content%}
 <h1>People</h1>
 
-{% if people %}
+{% if person_list %}
 <ul>
-    {% for person in people %}
+    {% for person in person_list %}
     {% include 'people_list_item.html' with guy=person %}
     {% endfor %}
 </ul>
 {% else %}
 <p>No people!</p>
 {%endif%}
+{% endblock%}
+
+
+
+
+
