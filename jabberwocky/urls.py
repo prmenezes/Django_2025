@@ -1,4 +1,3 @@
-
 """
 URL configuration for jabberwocky project.
 
@@ -15,28 +14,39 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from home.views import HomeView, PeopleView, PersonDetailView, AddressView
 
-from django.http import HttpResponse
 from django.contrib import admin
 from django.urls import path
+
+from home.views import (
+    HomeView,
+    PeopleView,
+    PersonDetailView,
+    AddressDetailView,
+    AddressListView,
+    AddressUpdateView,
+    AddressDeleteView,
+    AddressCreateView,
+)
 
 
 # def inventory(request, *args, **kwargs):
 #     return HttpResponse(f"foo:{kwargs.get('foo')} and bar: {kwargs['bar']}")
 
 
-
-
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
-    path('admin/', admin.site.urls),
-    path('people/', PeopleView.as_view(), name="people_list"),
-    path('people/<int:pk>/', PersonDetailView.as_view(), name="person_details"),
-    path('addresses/create/',AddressView.as_view(), name="create_address"),
+    path("", HomeView.as_view(), name="home"),
+    path("admin/", admin.site.urls),
 
+    path("people/", PeopleView.as_view(), name="people_list"),
+    path("people/<int:pk>/", PersonDetailView.as_view(), name="person_details"),
 
-    
+    path("addresses/", AddressListView.as_view(), name="address_list"),
+    path("addresses/<int:pk>/", AddressDetailView.as_view(), name="address_details"),
+    path("addresses/<int:pk>/edit", AddressUpdateView.as_view(), name="update_address"),
+    path("addresses/<int:pk>/delete", AddressDeleteView.as_view(), name="delete_address"),
+    path("addresses/create/", AddressCreateView.as_view(), name="create_address"),
+
 ]
 
-#print(urlpatterns)
+# print(urlpatterns)

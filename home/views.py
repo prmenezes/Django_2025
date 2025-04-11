@@ -1,21 +1,17 @@
 from django.shortcuts import render
 
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView, View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView, CreateView, DeleteView, UpdateView
 
-
+from home.models.address import Address
 from home.models.person import Person
+
 from home.forms import AddressForm
 
-# Create your views here.
 
-# class SearchContextMixin:
-        
-#         def get_context_data(self, **kwargs):
-#             context =  super().get_context_data(**kwargs)
-#             context["search_form"] = PeopleSearchForm()
-#             return context
 
 
 class HomeView(TemplateView):
@@ -24,14 +20,14 @@ class HomeView(TemplateView):
 
     
 
-class PeopleView( ListView):
+class PeopleView(ListView):
 
     # queryset = Person.objects.all()
     paginate_by = 10
     model = Person
 
-    # def post(self, request, q:str, *args, **kwargs):
-    #     return render("hello_world.html")
+    def post(self, request, q:str, *args, **kwargs):
+        return render("hello_world.html")
 
     #Handling GET in html form
     def get_queryset(self):
@@ -47,29 +43,39 @@ class PeopleView( ListView):
 
 
 class PersonDetailView(DetailView):
-
     model = Person
 
+class AddressListView(ListView):
+    paginate_by = 20
+    model = Address
 
 
-class AddressView(View):
+class AddressDetailView(DetailView):
+    model = Address
 
-    def get(self, request, *args, **kwargs):
-        context  = {
-            "form" : AddressForm()
-        }
+class AddressCreateView(CreateView):
+    model = Address
+    fields = ['street', 'unit_number', 'city', 'province', 'postal_code', 'country']
 
-        return render(request, "address_form.html", context)
+class AddressUpdateView(UpdateView):
+    model = Address
+    fields = ['street', 'unit_number', 'city', 'province', 'postal_code', 'country']
+    #template_name_suffix = "_update_form"
+
+class AddressDeleteView(DeleteView):
+    model = Address
+    success_url = reverse_lazy("address_list")
+
+# class AddressView(View):
+#     template_name = "address_form.html"
+#     form_class = AddressForm
+#     success_url = ""
+
+#     def form_valid(self, form: AddressForm):
+#         # This method is called when valid form data has been POSTed.
+#         # It should return an HttpResponse.
+#         #form.instance.save()
+#         return super().form_valid(form)
+#         success_url = ""
+
     
-
-    def post(self, request, *args, **kwargs):
-
-        address = AddressForm(data=request.POST)
-        if address.is_valid():
-            address.instance.save()
-
-        context  = {
-            "form" : address
-        }
-
-        return render(request, "address_form.html", context)

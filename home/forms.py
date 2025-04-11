@@ -8,8 +8,8 @@ class AddressForm(forms.ModelForm):
         model = Address
         exclude = []
 
-    def is_valid(self):
-        is_valid =  super().is_valid()
+    # def is_valid(self):
+    #     is_valid =  super().is_valid()
 
-        if self.cleaned_data.get("country") != "Canada":
-            return False
+    #     if self.cleaned_data.get("country") != "Canada":
+    #         return False
